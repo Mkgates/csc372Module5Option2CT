@@ -19,18 +19,25 @@ public class RecursiveSum {
 	
 	public static void main (String[] args) {
 		int[] nums = new int[5];
-		Scanner scnr = new Scanner(System.in);
 		
-		System.out.println("Enter 5 numbers:");
-		for (int i = 0; i < 5; i++) {
-			System.out.print("Number " + (i + 1) + ": ");
-			nums[i] = scnr.nextInt();
+		try (Scanner scnr = new Scanner(System.in)) {
+				System.out.println("Enter 5 numbers:");
+		
+				for (int i = 0; i < 5; i++) {
+					while (true) {
+						System.out.print("Number " + (i + 1) + ": ");
+						if (scnr.hasNextInt()) {
+							nums[i] = scnr.nextInt();
+							break;
+						} else {
+							System.out.println("Invalid input. Please enter a valid integer.");
+							scnr.next();
+						}
+					}
+				}
+		
+				System.out.println("The sum is: " + sumNumbers(nums, 0));
+		
+			}
 		}
-		
-		System.out.println("The sum is: " + sumNumbers(nums, 0));
-		scnr.close();
-		
-
 	}
-
-}
